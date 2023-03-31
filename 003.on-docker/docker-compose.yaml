@@ -3,7 +3,7 @@ version: '3.7'
 x-minio-common: &minio-common
   image: quay.io/minio/minio:latest
   # command: server --console-address ":9001" http://minio{1...3}:9000/mnt/data http://minio{4...6}:9000/mnt/data
-  command: server --console-address ":9001" http://minio{1...6}:9000/mnt/data
+  command: server --console-address ":9001" http://minio{1...4}:9000/mnt/data
 services:
   minio1:
     <<: *minio-common
@@ -41,21 +41,3 @@ services:
         target: /mnt/data
     ports:
       - 9004:9001
-  minio5:
-    <<: *minio-common
-    hostname: minio5
-    volumes:
-      - type: bind
-        source: ./data/minio5
-        target: /mnt/data
-    ports:
-      - 9005:9001
-  minio6:
-    <<: *minio-common
-    hostname: minio6
-    volumes:
-      - type: bind
-        source: ./data/minio6
-        target: /mnt/data
-    ports:
-      - 9006:9001
